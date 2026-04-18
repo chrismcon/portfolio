@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Christina Constantinou — Product Designer</title>
+  <meta name="description" content="Product Designer (UX/UI) working at the intersection of research, design, and emerging technology. Bristol, UK.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --warm-100: #FAF8F5;
+      --warm-200: #F2EDE6;
+      --warm-300: #E8DDD0;
+      --warm-400: #C9A98A;
+      --warm-500: #A07850;
+      --ink: #2A2118;
+      --ink-mid: #6B5B4E;
+      --ink-light: #9E8E82;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--warm-100);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 3.5rem 0 2.5rem;
+      border-bottom: 1.5px solid var(--ink);
+    }
+
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .hero h1 {
+      font-size: 46px;
+      font-weight: 500;
+      letter-spacing: -0.5px;
+      line-height: 1.05;
+      color: var(--ink);
+    }
+
+    .hero-meta {
+      text-align: right;
+      font-size: 13px;
+      color: var(--ink-mid);
+      line-height: 2;
+    }
+
+    .hero-meta a {
+      color: var(--warm-500);
+      text-decoration: none;
+    }
+
+    .hero-meta a:hover { text-decoration: underline; }
+
+    .tagline {
+      margin-top: 16px;
+      font-size: 15px;
+      color: var(--ink-mid);
+      line-height: 1.75;
+      max-width: 560px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 6px;
+      margin-top: 22px;
+      flex-wrap: wrap;
+    }
+
+    .nbtn {
+      font-size: 12px;
+      padding: 5px 15px;
+      border: 1px solid var(--warm-300);
+      border-radius: 20px;
+      cursor: pointer;
+      background: transparent;
+      color: var(--ink-mid);
+      transition: all 0.15s;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .nbtn:hover { border-color: var(--warm-500); color: var(--warm-500); }
+    .nbtn.active { background: var(--warm-500); color: #fff; border-color: var(--warm-500); }
+
+    /* SECTION LABEL */
+    .slabel {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      color: var(--ink-light);
+      text-transform: uppercase;
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--warm-300);
+    }
+
+    /* PROJECT CARDS */
+    .grid { display: flex; flex-direction: column; gap: 4px; }
+
+    .pc {
+      background: #FDFAF7;
+      border: 1px solid var(--warm-200);
+      border-radius: 12px;
+      padding: 1.75rem;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .pc:hover { border-color: var(--warm-300); background: #fff; }
+    .pc.open { background: #fff; border-color: var(--warm-300); }
+
+    .ch { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+    .cl { flex: 1; }
+
+    .cn {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      color: var(--ink-light);
+      margin-bottom: 6px;
+    }
+
+    .ct {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 1.25;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+
+    .cr { font-size: 13px; color: var(--ink-mid); margin-bottom: 12px; }
+
+    .tags { display: flex; gap: 5px; flex-wrap: wrap; }
+
+    .tag {
+      font-size: 11px;
+      padding: 3px 10px;
+      border: 1px solid var(--warm-300);
+      border-radius: 12px;
+      color: var(--ink-mid);
+      background: transparent;
+    }
+
+    .tag.hl { background: var(--warm-500); color: #fff; border-color: var(--warm-500); }
+
+    .ei {
+      font-size: 18px;
+      color: var(--ink-light);
+      flex-shrink: 0;
+      transition: transform 0.2s;
+      line-height: 1;
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--warm-300);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+
+    .pc.open .ei { transform: rotate(45deg); border-color: var(--warm-400); color: var(--warm-500); }
+
+    .cb {
+      display: none;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--warm-200);
+    }
+
+    .pc.open .cb { display: block; }
+
+    .cbg {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .cs h4 {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--warm-500);
+      margin-bottom: 8px;
+    }
+
+    .cs p, .cs ul {
+      font-size: 13.5px;
+      line-height: 1.75;
+      color: var(--ink-mid);
+    }
+
+    .cs ul { padding-left: 1rem; }
+    .cs ul li { margin-bottom: 3px; }
+
+    .ob {
+      grid-column: 1 / -1;
+      background: var(--warm-200);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin-top: 4px;
+    }
+
+    .ob h4 {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--warm-500);
+      margin-bottom: 6px;
+    }
+
+    .ob p { font-size: 13.5px; color: var(--ink-mid); line-height: 1.7; }
+
+    /* ABOUT */
+    .about {
+      background: var(--warm-200);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .about h3 {
+      font-size: 16px;
+      font-weight: 500;
+      grid-column: 1 / -1;
+      color: var(--ink);
+      margin-bottom: -4px;
+    }
+
+    .about p { font-size: 13.5px; line-height: 1.75; color: var(--ink-mid); }
+
+    .skl { display: flex; flex-direction: column; gap: 8px; }
+
+    .ski { display: flex; align-items: center; gap: 9px; font-size: 13px; color: var(--ink-mid); }
+
+    .skd {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--warm-400);
+      flex-shrink: 0;
+    }
+
+    /* FOOTER */
+    .foot {
+      margin: 2rem 0 3rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--warm-300);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .foot p { font-size: 13px; color: var(--ink-light); }
+
+    .cbtn {
+      font-size: 12px;
+      padding: 5px 14px;
+      border: 1px solid var(--warm-300);
+      border-radius: 16px;
+      cursor: pointer;
+      background: transparent;
+      color: var(--ink-mid);
+      font-family: 'Inter', sans-serif;
+      transition: all 0.15s;
+    }
+
+    .cbtn:hover { background: var(--warm-500); color: #fff; border-color: var(--warm-500); }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 30px; }
+      .hero-top { flex-direction: column; }
+      .hero-meta { text-align: left; }
+      .cbg { grid-template-columns: 1fr; }
+      .about { grid-template-columns: 1fr; }
+      .container { padding: 0 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header class="hero">
+    <div class="hero-top">
+      <h1>Christina Constantinou</h1>
+      <div class="hero-meta">
+        Bristol, UK<br>
+        chrismcon.dev@gmail.com<br>
+        <a href="https://linkedin.com/in/christinaconstantinou" target="_blank" rel="noopener">linkedin.com/in/christinaconstantinou</a>
+      </div>
+    </div>
+    <p class="tagline">Product Designer (UX/UI) working at the intersection of research, design, and emerging technology. Turning complex ideas into practical, user-centred experiences.</p>
+    <nav class="nav" aria-label="Filter projects">
+      <button class="nbtn active" onclick="filter('all',this)">All work</button>
+      <button class="nbtn" onclick="filter('ux',this)">UX / Product</button>
+      <button class="nbtn" onclick="filter('xr',this)">XR / Immersive</button>
+      <button class="nbtn" onclick="filter('innovation',this)">Innovation</button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="slabel">Selected projects</div>
+    <div class="grid" id="grid">
+
+      <article class="pc" data-cat="ux" onclick="toggle(this)">
+        <div class="ch">
+          <div class="cl">
+            <div class="cn">01</div>
+            <div class="ct">Cosy Crafter — AI Crafting Companion</div>
+            <div class="cr">Product Designer / Developer &nbsp;·&nbsp; Personal project, 2025</div>
+            <div class="tags">
+              <span class="tag hl">Figma</span>
+              <span class="tag hl">AI interaction design</span>
+              <span class="tag">Mobile app</span>
+              <span class="tag">User flows</span>
+              <span class="tag">Unity</span>
+            </div>
+          </div>
+          <div class="ei" aria-hidden="true">+</div>
+        </div>
+        <div class="cb">
+          <div class="cbg">
+            <div class="cs"><h4>Problem</h4><p>Learning crochet and knitting without real-time support is genuinely hard. Beginners struggle to interpret patterns and correct mistakes — existing apps offer static tutorials but no responsive guidance.</p></div>
+            <div class="cs"><h4>Process</h4><ul><li>Mapped AI interaction pathways using a flow tree in Figma</li><li>Created scenario storyboards to define user journeys</li><li>Designed feature set and interface concepts in Figma</li><li>Built a working prototype in Unity with an integrated OpenAI agent</li></ul></div>
+            <div class="cs"><h4>Design focus</h4><p>Structuring conversational AI interactions so guidance feels natural and contextually useful — not like a chatbot bolted onto a tutorial. Designing intuitive flows between learning mode and active making.</p></div>
+            <div class="cs"><h4>What I explored</h4><p>How AI companions can support hands-on creative tasks in real time, and what interaction patterns make that feel genuinely helpful rather than interruptive.</p></div>
+            <div class="ob"><h4>Outcome</h4><p>Working Unity prototype with integrated OpenAI agent. Figma artefacts including flow tree, scenario storyboards, and interface concepts. Exploration of conversational AI in creative learning tools.</p></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="pc" data-cat="ux xr" onclick="toggle(this)">
+        <div class="ch">
+          <div class="cl">
+            <div class="cn">02</div>
+            <div class="ct">Hippocampus — VR Dementia Diagnostic Tool</div>
+            <div class="cr">CTO / Experience Designer &nbsp;·&nbsp; 2020–2021</div>
+            <div class="tags">
+              <span class="tag hl">User research</span>
+              <span class="tag hl">Accessibility</span>
+              <span class="tag">Healthcare UX</span>
+              <span class="tag">Onboarding design</span>
+              <span class="tag">Prototyping</span>
+            </div>
+          </div>
+          <div class="ei" aria-hidden="true">+</div>
+        </div>
+        <div class="cb">
+          <div class="cbg">
+            <div class="cs"><h4>Problem</h4><p>Early dementia diagnosis relies on clinical tests that can feel alienating. Could immersive technology create a more intuitive and accessible diagnostic experience — particularly for elderly, non-technical users?</p></div>
+            <div class="cs"><h4>Process</h4><ul><li>Conducted research into user needs, behaviours, and accessibility requirements</li><li>Identified key barriers for non-technical users new to VR</li><li>Designed onboarding flows to reduce cognitive load and anxiety</li><li>Prototyped and iterated based on user testing and feedback</li></ul></div>
+            <div class="cs"><h4>Design focus</h4><p>Creating accessible interactions for users with no VR experience. Designing onboarding that felt reassuring rather than technical, with interactions that mapped to natural spatial behaviour.</p></div>
+            <div class="cs"><h4>What I explored</h4><p>How VR can be designed for users who are anxious, unfamiliar with technology, or cognitively impaired — and how spatial memory tasks can be made intuitive through careful interaction design.</p></div>
+            <div class="ob"><h4>Outcome</h4><p>Working VR prototype exploring spatial memory as a diagnostic tool. Early exploration of accessible VR in healthcare, with a focus on non-technical user onboarding and inclusive interaction design.</p></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="pc" data-cat="innovation" onclick="toggle(this)">
+        <div class="ch">
+          <div class="cl">
+            <div class="cn">03</div>
+            <div class="ct">MyWorld — Innovation Programme Design &amp; Delivery</div>
+            <div class="cr">Innovation Manager &nbsp;·&nbsp; Digital Catapult, 2023–2025</div>
+            <div class="tags">
+              <span class="tag hl">Discovery workshops</span>
+              <span class="tag hl">Stakeholder management</span>
+              <span class="tag">UKRI-funded</span>
+              <span class="tag">Product mentoring</span>
+              <span class="tag">R&amp;D delivery</span>
+            </div>
+          </div>
+          <div class="ei" aria-hidden="true">+</div>
+        </div>
+        <div class="cb">
+          <div class="cbg">
+            <div class="cs"><h4>Problem</h4><p>Early-stage creative technology companies often have strong ideas but lack the structure and product thinking to develop and progress them into funded, deliverable projects.</p></div>
+            <div class="cs"><h4>Process</h4><ul><li>Led the MyWorld Challenge Call from inception — designing the programme structure</li><li>Facilitated discovery workshops with SMEs to surface needs and define direction</li><li>Worked with technical, academic, and business stakeholders including Cambridge University</li><li>Translated complex concepts (including CHERI architecture) for diverse audiences</li><li>Assessed proposals for the Design to Deliver funding call</li></ul></div>
+            <div class="cs"><h4>Design focus</h4><p>Applying user research and discovery methods to programme design — treating companies as users and their product challenges as the problem space to be understood and shaped.</p></div>
+            <div class="cs"><h4>What I explored</h4><p>How innovation programme delivery and product design methodology overlap, and how structured facilitation helps early-stage teams move from ambiguity to funded outcomes.</p></div>
+            <div class="ob"><h4>Outcome</h4><p>Supported multiple SMEs through R&amp;D and product development across MyWorld, CR&amp;D2, and Digital Security by Design. Helped teams progress ideas into funded and delivered projects.</p></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="pc" data-cat="xr innovation" onclick="toggle(this)">
+        <div class="ch">
+          <div class="cl">
+            <div class="cn">04</div>
+            <div class="ct">Tangle Immersive — XR Studio &amp; Experience Design</div>
+            <div class="cr">Director / Experience Designer &nbsp;·&nbsp; 2020–Present (project-based)</div>
+            <div class="tags">
+              <span class="tag hl">XR design</span>
+              <span class="tag hl">End-to-end delivery</span>
+              <span class="tag">Prototyping</span>
+              <span class="tag">Community engagement</span>
+              <span class="tag">Co-founder</span>
+            </div>
+          </div>
+          <div class="ei" aria-hidden="true">+</div>
+        </div>
+        <div class="cb">
+          <div class="cbg">
+            <div class="cs"><h4>Overview</h4><p>Co-founded an immersive studio creating XR experiences for public and community engagement in Bristol. Led end-to-end product design from concept through to delivery, working with creatives and developers across the immersive community.</p></div>
+            <div class="cs"><h4>Design focus</h4><ul><li>Designing user interactions within immersive environments</li><li>Developing concepts and prototypes for XR experiences</li><li>Accessibility and engagement for public, non-specialist audiences</li><li>Mentoring emerging creatives in inclusive design practice</li></ul></div>
+            <div class="ob"><h4>Outcome</h4><p>Delivered immersive experiences for public showcase. Built collaborative projects within the Bristol immersive community. Co-founders featured in Container Magazine interview.</p></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="pc" data-cat="xr" onclick="toggle(this)">
+        <div class="ch">
+          <div class="cl">
+            <div class="cn">05</div>
+            <div class="ct">Sync In — Multi-user Mixed Reality Experience</div>
+            <div class="cr">Developer / Interaction Support &nbsp;·&nbsp; MA VR Final Project</div>
+            <div class="tags">
+              <span class="tag hl">Interaction design</span>
+              <span class="tag">Mixed reality</span>
+              <span class="tag">Unreal Engine</span>
+              <span class="tag">Multi-user</span>
+              <span class="tag">Audience participation</span>
+            </div>
+          </div>
+          <div class="ei" aria-hidden="true">+</div>
+        </div>
+        <div class="cb">
+          <div class="cbg">
+            <div class="cs"><h4>Overview</h4><p>A mixed reality experience where participants interact across physical and virtual environments. An AI manages the experience, placing participants as collaborators who complete challenges while the AI learns from their interactions in real time.</p></div>
+            <div class="cs"><h4>My contribution</h4><ul><li>Developed the experience in Unreal Engine</li><li>Implemented interaction mechanics between participants</li><li>Shaped how interactions worked in practice — translating design intent into functional behaviour</li><li>Ensured interactions felt intuitive and responsive across physical and virtual layers</li></ul></div>
+            <div class="ob"><h4>Outcome</h4><p>Delivered as MA VR final project. Explored new approaches to multi-user interaction in XR and how AI can manage personalised, responsive mixed reality experiences for live audiences.</p></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="pc" data-cat="xr" onclick="toggle(this)">
+        <div class="ch">
+          <div class="cl">
+            <div class="cn">06</div>
+            <div class="ct">Project Maria — Immersive VR Storytelling</div>
+            <div class="cr">Experience Designer &nbsp;·&nbsp; CampFR VR Residency, supported by HTC Vive</div>
+            <div class="tags">
+              <span class="tag hl">Spatial design</span>
+              <span class="tag hl">Narrative UX</span>
+              <span class="tag">VR</span>
+              <span class="tag">Photogrammetry</span>
+              <span class="tag">Tilt Brush</span>
+            </div>
+          </div>
+          <div class="ei" aria-hidden="true">+</div>
+        </div>
+        <div class="cb">
+          <div class="cbg">
+            <div class="cs"><h4>Overview</h4><p>A VR project exploring storytelling through immersive environments — investigating how spatial design and intuitive movement can support narrative engagement without traditional UI or on-screen instruction.</p></div>
+            <div class="cs"><h4>Design focus</h4><ul><li>How users engage with narrative in VR without explicit guidance</li><li>How spatial cues can direct attention and support story</li><li>Designing intuitive movement through an immersive environment</li><li>Using photogrammetry and Tilt Brush for environmental storytelling</li></ul></div>
+            <div class="ob"><h4>Outcome</h4><p>Showcased at CampFR VR Residency, supported by HTC Vive. Explored how spatial composition can replace traditional UI in narrative-driven XR — with implications for accessible, instruction-free experience design.</p></div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <section class="about" aria-label="About Christina">
+      <h3>About</h3>
+      <div>
+        <p>Product Designer (UX/UI) with a background spanning immersive technology, innovation programmes, and early-stage product development. I bring a strong understanding of how to move from ambiguity to clarity — translating complex technical ideas into user-centred solutions that are practical, accessible, and grounded in real user needs.</p>
+      </div>
+      <div class="skl">
+        <div class="ski"><span class="skd"></span>User research &amp; discovery</div>
+        <div class="ski"><span class="skd"></span>Workshop facilitation &amp; co-creation</div>
+        <div class="ski"><span class="skd"></span>Interaction &amp; experience design (XR / mobile)</div>
+        <div class="ski"><span class="skd"></span>Figma · Miro · Unity · Unreal Engine</div>
+        <div class="ski"><span class="skd"></span>Stakeholder management &amp; senior communication</div>
+        <div class="ski"><span class="skd"></span>Agile collaboration &amp; R&amp;D programme delivery</div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p>chrismcon.dev@gmail.com &nbsp;·&nbsp; Bristol, UK &nbsp;·&nbsp; 2026</p>
+      <button class="cbtn" onclick="navigator.clipboard.writeText('chrismcon.dev@gmail.com').then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy email',2000)})">Copy email</button>
+    </footer>
+  </main>
+
+</div>
+
+<script>
+  function toggle(card) {
+    const was = card.classList.contains('open');
+    document.querySelectorAll('.pc').forEach(c => c.classList.remove('open'));
+    if (!was) card.classList.add('open');
+  }
+
+  function filter(cat, btn) {
+    document.querySelectorAll('.nbtn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.pc').forEach(card => {
+      const cats = card.dataset.cat || '';
+      card.style.display = (cat === 'all' || cats.includes(cat)) ? '' : 'none';
+    });
+  }
+</script>
+</body>
+</html>
